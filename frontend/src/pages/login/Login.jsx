@@ -31,12 +31,12 @@ export const Login = () => {
 							className='w-full input input-bordered focus:outline-slate-200 h-10'
 						/>
 					</div>
-                    <a href='#'  className='text-sm text-slate-300 hover:text-slate-50 mt-2 inline-block'>
+                    {/* <a href='#'  className='text-sm text-slate-300 hover:text-slate-50 mt-2 inline-block'>
                     {"Don't"} have an account?
-                    </a>
-                    {/* <Link to='#' className='text-sm  hover:underline hover:text-blue-600 mt-2 inline-block'>
+                    </a> */}
+                    <Link to='/signup' className='text-sm text-slate-300 hover:text-blue-600 mt-2 inline-block'>
 						{"Don't"} have an account?
-					</Link> */}
+					</Link>
 
                     <div>
 						<button className='btn btn-block btn-sm mt-2'>Login
