@@ -1,8 +1,10 @@
 const Conversation = require("../models/conversationModel");
 const Message = require("../models/messageModel");
+const { getReceiverSocketId,io } = require("../socket/socket");
 
 module.exports.sendMessage = async (req,res)=>{
 try {
+    
     const {message} = req.body;
     const {id:receiverId} = req.params;
     const  senderId = req.user._id;
@@ -26,13 +28,19 @@ try {
        conversation.messages.push(newMessage._id);
     };
 
-    // socket io functionality will go here
 
     // await conversation.save(); if this takes 1 second or more
     // await newMessage.save(); this needs to wait for the conversation to be saved
 
     //this will run in parallel
     await Promise.all([conversation.save(),newMessage.save()]);
+
+        // socket io functionality will go here
+        const receiverSocketId = getReceiverSocketId(receiverId);
+        if(receiverSocketId){
+            //io.to(<socket_id>).emit() used to send events to specific client
+            io.to(receiverSocketId).emit("newMessage",newMessage);
+        }
 
     res.status(201).json(newMessage)
 

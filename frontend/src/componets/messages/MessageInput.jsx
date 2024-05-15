@@ -7,7 +7,6 @@ const MessageInput = () => {
 	const { loading, sendMessage } = useSendMessage();
 
 	const handleSubmit = async (e) => {
-		alert("hai")
 		e.preventDefault();
 		if (!message) return;
 		await sendMessage(message);

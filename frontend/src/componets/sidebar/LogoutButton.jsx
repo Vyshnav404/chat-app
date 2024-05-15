@@ -7,8 +7,10 @@ export const LogoutButton = () => {
   return (
     <div className='mt-auto '>
    {!loading ? (
-				<BiLogOut className='w-6 h-6 text-white cursor-pointer  hover:p-1' onClick={logout} />
-			) : (
+        <div className='tooltip' data-tip="Logout">
+				<BiLogOut className='tooltip w-6 h-6 text-white cursor-pointer  hover:p-1'   onClick={logout} />
+        </div>
+  		) : (
 				<span className='loading loading-spinner'></span>
 			)}
 
