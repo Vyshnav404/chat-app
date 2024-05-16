@@ -7,12 +7,8 @@ export const useListenMessages = () => {
 const {  socket } = useSocketContext();
 const { messages,setMessages,selectedConversation } = useConversation();
 
-const isMessageFromSelectedConversation = selectedConversation?.messages?.some(
-    (msg) => msg.senderId === messages?.senderId
-  );
 
 useEffect(() => {
-    if(isMessageFromSelectedConversation){
     socket?.on("newMessage", (newMessage) => {
             newMessage.shouldShake = true;
             const sound = new Audio(notificationSound);
@@ -20,7 +16,7 @@ useEffect(() => {
             setMessages([...messages, newMessage]);
        
     });
-}
+
 
     return () => socket?.off("newMessages");
 },[socket,setMessages,messages])
