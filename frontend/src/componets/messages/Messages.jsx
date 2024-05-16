@@ -3,9 +3,13 @@ import Message from './Message'
 import useGetMessages from '../../hooks/useGetMessages'
 import MessageSkeleton from '../skeletons/MessageSkeleton'
 import { useListenMessages } from '../../hooks/useListenMessages'
+import useConversation from '../../zustand/useConversation'
 
 export const Messages = () => {
 	const { loading, messages } = useGetMessages()
+	const { selectedConversation } = useConversation();
+	console.log("hei message 1",selectedConversation);
+
 	useListenMessages();
 	const lastMessageRef = useRef();
 
