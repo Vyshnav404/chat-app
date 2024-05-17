@@ -3,6 +3,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import useConversation from '../../zustand/useConversation';
 import useGetConversations from '../../hooks/useGetConversation'
 import toast from 'react-hot-toast';
+import { NotificationButton } from './NotificationButton';
 
 export const SearchInput = () => {
 	const [search, setSearch] = useState("");
@@ -30,6 +31,7 @@ export const SearchInput = () => {
      			<button type='submit' className='btn btn-circle bg-sky-500 text-white'>
      				<IoSearchSharp className='w-6 h-6 outline-none' />
      			</button>
+				<NotificationButton />
      		</form>
   )
 }

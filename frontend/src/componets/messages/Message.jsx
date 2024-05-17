@@ -4,7 +4,6 @@ import { useAuthContext } from '../../context/AuthContext';
 import { extractTime } from '../../utils/extractTime';
 
 const Message = ({ message }) => {
-  console.log("message 1", message)
   const { authUser } = useAuthContext();
   const { selectedConversation } = useConversation();
   const fromMe = message.senderId === authUser._id;
