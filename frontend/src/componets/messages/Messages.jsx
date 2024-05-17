@@ -8,7 +8,9 @@ import useConversation from '../../zustand/useConversation'
 export const Messages = () => {
 	const { loading, messages } = useGetMessages()
 	const { selectedConversation } = useConversation();
-	console.log("hei message 1",selectedConversation);
+	const filteredMessages = messages.filter(msg => 
+		msg.senderId === selectedConversation._id || msg.receiverId === selectedConversation._id
+	  );
 
 	useListenMessages();
 	const lastMessageRef = useRef();
@@ -17,20 +19,20 @@ export const Messages = () => {
 		setTimeout(() => {
 			lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
 		}, 100);
-	}, [messages]);
+	}, [filteredMessages]);
 
   return (
     <div className='px-4 flex-1 overflow-auto'>
 		{!loading &&
-				messages.length > 0 &&
-				messages.map((message) => (
+				filteredMessages.length > 0 &&
+				filteredMessages.map((message) => (
 					<div key={message._id} ref={lastMessageRef}>
 						<Message message={message} />
 					</div>
 				))}
 				
 			{loading && [...Array(5)].map((_, idx) => <MessageSkeleton key={idx} />)}
-			{!loading && messages.length === 0 && (
+			{!loading && filteredMessages.length === 0 && (
 				<p className='text-center text-gray-500'>Send a message to start the conversation</p>
 			)}
      		</div>
