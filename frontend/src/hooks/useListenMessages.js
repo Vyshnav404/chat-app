@@ -6,9 +6,9 @@ import notificationSound from '/notification.wav';
 export const useListenMessages = () => {
 const {  socket } = useSocketContext();
 const { messages,setMessages,selectedConversation,notification,setNotification } = useConversation();
-console.log("notifications",notification)
-useEffect(() => {
 
+useEffect(() => {
+//   alert("hai")
     socket?.on("newMessage", (newMessage) => {
             newMessage.shouldShake = true;
             const sound = new Audio(notificationSound);
@@ -17,8 +17,8 @@ useEffect(() => {
        
     });
 
-    socket.on("getNotification",(res)=>{
-        const isChatOpen = selectedConversation._id === res.senderId;
+    socket?.on("getNotification",(res)=>{
+        const isChatOpen = selectedConversation?._id === res?.senderId;
 
         if(isChatOpen){
             setNotification([...notification,{...res,isRead:true}]);

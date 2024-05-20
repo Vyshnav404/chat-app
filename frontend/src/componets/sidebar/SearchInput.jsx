@@ -31,7 +31,9 @@ export const SearchInput = () => {
      			<button type='submit' className='btn btn-circle bg-sky-500 text-white'>
      				<IoSearchSharp className='w-6 h-6 outline-none' />
      			</button>
+				<div >
 				<NotificationButton />
+				</div>
      		</form>
   )
 }

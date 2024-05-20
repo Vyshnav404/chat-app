@@ -12,7 +12,7 @@ export const Messages = () => {
 		msg.senderId === selectedConversation._id || msg.receiverId === selectedConversation._id
 	  );
 
-	useListenMessages();
+	// useListenMessages();
 	const lastMessageRef = useRef();
 
 	useEffect(() => {
