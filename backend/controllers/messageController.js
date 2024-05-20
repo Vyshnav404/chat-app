@@ -40,6 +40,11 @@ try {
         if(receiverSocketId){
             //io.to(<socket_id>).emit() used to send events to specific client
             io.to(receiverSocketId).emit("newMessage",newMessage);
+            io.to(receiverSocketId).emit("getNotification",{
+                senderId:newMessage.senderId,
+                isRead:false,
+                date:new Date(),
+            })
         }
 
     res.status(201).json(newMessage)
