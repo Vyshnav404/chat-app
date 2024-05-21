@@ -31,7 +31,7 @@ export const NotificationButton = () => {
         }
         </div>
         {
-            isOpen && ( <div className='absolute bg-blue-500 p-2 rounded'>
+            isOpen && ( <div className='absolute bg-blue-500 p-2 rounded max-h-80 overflow-auto z-50'>
              <div className='flex gap-4'> 
             <div className='text-white gap-2 font-bold'>Notifications</div> 
             <div className='text-white cursor-pointer bg-gray-400 rounded-md p-1' onClick={()=> markAllNotificationsAsRead(notification)}>mark as read</div> 
