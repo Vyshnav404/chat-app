@@ -1,6 +1,8 @@
 const Conversation = require("../models/conversationModel");
 const Message = require("../models/messageModel");
 const { getReceiverSocketId,io } = require("../socket/socket");
+const mongoose = require('mongoose');
+const { ObjectId } = mongoose.Types;
 
 module.exports.sendMessage = async (req,res)=>{
 try {
@@ -50,7 +52,7 @@ try {
     res.status(201).json(newMessage)
 
 } catch (error) {
-    console.log("Error in message controller",error);
+    console.log("Error in message controller2",error);
     res.status(500).json({message:'interval server error'})
 }
 }
@@ -59,7 +61,6 @@ module.exports.getMessages = async (req,res)=>{
     try {
         const {id:userToChatId} = req.params;
         const senderId = req.user._id;
-
         const conversation  = await Conversation.findOne({
             participants :{$all: [senderId,userToChatId]}
         }).populate("messages");
@@ -70,8 +71,22 @@ module.exports.getMessages = async (req,res)=>{
 
 
     } catch (error) {
-        console.log("Error in message controller",error);
+        console.log("Error in message controller3",error);
     res.status(500).json({message:'interval server error'})
+    }
+}
+
+module.exports.getConversations = async (req,res)=>{
+    try {
+        const userId = req.user._id;
+        // const userObjectId = new ObjectId(userId);
+        const conversation = await Conversation.find({ participants: userId });
+        if(!conversation) return res.status(200).json([]);
+        res.status(200).json(conversation)
+        
+    } catch (error) {
+        console.log("Error in message controller4",error);
+        res.status(500).json({message:'interval server error'})
     }
 }
 

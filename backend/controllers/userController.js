@@ -14,3 +14,20 @@ module.exports.getUsersForSidebar = async (req, res) => {
         res.status(500).json({ message: "Internal server error" });
     }
 }
+
+module.exports.getSearchedUser = async (req,res) =>{
+try {
+    const searchVal = req.body.searchVal;
+    const regex = new RegExp(searchVal, 'i');
+    const users = await User.find({
+        $or: [
+            { fullName: { $regex: regex } },
+            { userName: { $regex: regex } }
+          ]
+    })    
+    res.status(200).json(users);
+} catch (error) {
+    console.error("Error searching users: ", error.message);
+    res.status(500).json({ message: 'Internal server error' });
+}
+}
